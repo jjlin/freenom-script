@@ -1639,7 +1639,9 @@ fi
 # log renewal results and if needed add 'Minimum Advance Renewal Days' from renewalResult to renewError
 if [ "$freenom_renew_domain" -eq 1 ]; then
   if [ -n "$renewOk" ]; then
-    echo -e "[$(date)] Domain renewal successful: ${renewOk}" >> "${out_path}.log"
+    msg="Domain renewal successful: ${renewOk}"
+    echo -e "[$(date)] ${msg}" >> "${out_path}.log"
+    appriseEvent DomainRenewal "${msg}"
   fi
   if [[ -n "$freenom_renew_log" && "$freenom_renew_log" -eq 1 ]]; then
     if [ "$infoCount" -gt 0 ]; then
